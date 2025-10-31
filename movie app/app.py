@@ -4,6 +4,7 @@ Lesson 3.1 STARTER CODE
 """
 from flask import Flask, render_template, request, redirect, url_for, flash
 from sample_movies import movies
+from models import db, Movie
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dev-secret-key-change-in-production'
@@ -11,7 +12,11 @@ app.config['SECRET_KEY'] = 'dev-secret-key-change-in-production'
 # ⚠️ PROBLEM: These movies only exist in RAM (temporary memory)
 # When you stop the Flask app, this data is GONE forever!
 
+# DATABASE CONFIGURATION
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cinematch.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)
 # ============================================================================
 # ROUTES
 # ============================================================================

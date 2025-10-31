@@ -13,5 +13,8 @@ class Movie(db.Model):
     rating = db.Column(db.Text)
     poster_url = db.Column(db.String(500))
     # created_at = db.Column(db.datetime, default=datetime.utcnow)
-    created_at = db.Column(db.datetime, (timezone=True))
+    created_at = db.Column(db.datetime, ()(timezone=True))
     default = lambda:datetime.cow(timezone.utc)
+
+    def __repr__(self):
+        return f"<Movie: {self.title} ({self.year})>"
